@@ -17,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Scan Repo
-        uses: Legit-Labs/legitify@1
+        uses: Legit-Labs/legitify@1.0.1
         with:
           github_token: ${{ steps.get_workflow_token.outputs.token }}
           analyze_self_only: "true"
