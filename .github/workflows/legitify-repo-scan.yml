@@ -22,5 +22,11 @@ jobs:
           github_token: ${{ steps.get_workflow_token.outputs.token }}
           analyze_self_only: "true"
           scorecard: yes
+      - name: Print Error Log
+        if: failure()
+        run: cat ./error.log
+      - name: Print Permisson Log
+        if: failure()
+        run: cat ./permissions_log.json
           
     
