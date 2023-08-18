@@ -11,8 +11,8 @@ jobs:
         id: get_workflow_token
         uses: peter-murray/workflow-application-token-action@v2
         with:
-          application_id: ${{ vars.GH_APP_ID_GOVENOR }}
-          application_private_key: ${{ secrets.GH_APP_KEY_GOVENOR }}
+          application_id: ${{ vars.GH_APP_ID_GOVERNOR }}
+          application_private_key: ${{ secrets.GH_APP_KEY_GOVERNOR }}
           organization: ${{ vars.ORGANIZATION }}
       - name: Checkout
         uses: actions/checkout@v3
@@ -21,8 +21,7 @@ jobs:
         with:
           github_token: ${{ steps.get_workflow_token.outputs.token }}
           analyze_self_only: "true"
-          scorecard: yes
-      - name: Print Error Log
+      - name: Print Files
         if: failure()
         run: ls
       - name: Print Error Log
