@@ -24,9 +24,12 @@ jobs:
           scorecard: yes
       - name: Print Error Log
         if: failure()
-        run: cat ./error.log
+        run: ls
+      - name: Print Error Log
+        if: failure()
+        run: cat error.log
       - name: Print Permisson Log
         if: failure()
-        run: cat ./permissions_log.json
+        run: cat permissions_log.json
           
     
