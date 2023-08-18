@@ -1,4 +1,4 @@
-name: Run Legitify Scan
+name: Legitify Scan (GH App)
 
 on: [workflow_dispatch]
 
