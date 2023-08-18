@@ -1,4 +1,4 @@
-name: Legitify Scan (GH App)
+name: Legitify Scan (PAT)
 
 on: [workflow_dispatch]
 
