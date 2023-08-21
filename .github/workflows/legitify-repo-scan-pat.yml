@@ -19,7 +19,7 @@ jobs:
         with:
           github_token: ${{ secrets.GH_PAT }}
           analyze_self_only: "true"
-          scorecard: verbose
+          scorecard: yes
       - name: List Content
         if: always()
         run: ls
