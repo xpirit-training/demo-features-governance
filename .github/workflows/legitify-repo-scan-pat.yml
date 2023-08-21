@@ -2,6 +2,11 @@ name: Legitify Scan (PAT)
 
 on: [workflow_dispatch]
 
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
 jobs:
   scan-repository:
     name: Scan Repository
