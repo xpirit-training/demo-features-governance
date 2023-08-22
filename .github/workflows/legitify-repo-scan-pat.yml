@@ -20,5 +20,15 @@ jobs:
           github_token: ${{ secrets.GH_PAT }}
           analyze_self_only: "true"
           scorecard: yes
-          
-    
+      - name: Create Summary Issue
+        if: success()
+        run: |
+          date=`date +%m-%d-%Y`
+          gh issue create --title "Daily Scan Report - ${date}" --body "The summary is available at ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+      - name: Create Error Issue
+        if: failure()
+        run: |
+          date=`date +%m-%d-%Y`
+          gh issue create --title "Repository Scan Failed - ${date}" --body "The repository scan failed, see ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+      
+        
