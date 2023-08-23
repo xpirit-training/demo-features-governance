@@ -26,11 +26,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          date=`date +%m-%d-%Y`
-          pip install jinja2-cli         
-          echo '{ "scan_date": "${date}", "scan_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }' > data.json
+          DATE=`date +%m-%d-%Y`
+          URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          pip install jinja2-cli               
+          jq --null-input --arg date $DATE --arg url $URL '{"scan_date": $date, "scan_url": $url}' > data.json
           gh issue create \
-            --title "Daily Scan Report - ${date}" \
+            --title "Daily Scan Report - ${DATE}" \
             --body "$(jinja2 ./.github/templates/scan-report.md data.json)" \
             --label "repository-report"
       - name: Create Error Issue
