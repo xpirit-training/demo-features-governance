@@ -6,7 +6,7 @@ permissions:
   actions: read
   contents: read
   security-events: write
-  issues: writee
+  issues: write
 
 jobs:
   scan-repository:
