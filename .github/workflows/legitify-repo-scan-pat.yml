@@ -27,10 +27,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           date=`date +%m-%d-%Y`
+          pip install jinja2-cli         
+          echo '{ "scan_date": "${date}", "scan_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }' > data.json
           gh label create repository-report -c 5887C2
           gh issue create \
             --title "Daily Scan Report - ${date}" \
-            --body "The summary is available at ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --body "$(jinja2 ./.github/templates/scan-report.md data.json)" \
             --label "repository-report"
       - name: Create Error Issue
         if: failure()
