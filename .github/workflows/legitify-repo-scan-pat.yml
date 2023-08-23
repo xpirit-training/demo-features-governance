@@ -27,6 +27,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           date=`date +%m-%d-%Y`
+          gh label create repository-report -c 5887C2
           gh issue create \
             --title "Daily Scan Report - ${date}" \
             --body "The summary is available at ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
@@ -37,6 +38,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           date=`date +%m-%d-%Y`
+          gh label create failure -c E61234
           gh issue create \
             --title "Repository Scan Failed - ${date}" \
             --body "The repository scan failed, see ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
