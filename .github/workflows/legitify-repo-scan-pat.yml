@@ -6,7 +6,7 @@ permissions:
   actions: read
   contents: read
   security-events: write
-  issues: write
+  issues: writee
 
 jobs:
   scan-repository:
@@ -27,13 +27,21 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           date=`date +%m-%d-%Y`
-          gh issue create --title "Daily Scan Report - ${date}" --body "The summary is available at ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          gh issue create \
+            --title "Daily Scan Report - ${date}" \
+            --body "The summary is available at ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --label "repository-report" \
+            --assignee @xpirit-training/admins
       - name: Create Error Issue
         if: failure()
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           date=`date +%m-%d-%Y`
-          gh issue create --title "Repository Scan Failed - ${date}" --body "The repository scan failed, see ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          gh issue create \
+            --title "Repository Scan Failed - ${date}" \
+            --body "The repository scan failed, see ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --label "repository-report, failure" \
+            --assignee @xpirit-training/admins
       
         
