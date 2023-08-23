@@ -30,8 +30,7 @@ jobs:
           gh issue create \
             --title "Daily Scan Report - ${date}" \
             --body "The summary is available at ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-            --label "repository-report" \
-            --assignee @xpirit-training/admins
+            --label "repository-report"
       - name: Create Error Issue
         if: failure()
         env:
@@ -41,7 +40,6 @@ jobs:
           gh issue create \
             --title "Repository Scan Failed - ${date}" \
             --body "The repository scan failed, see ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-            --label "repository-report, failure" \
-            --assignee @xpirit-training/admins
+            --label "repository-report, failure"
       
         
